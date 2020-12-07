@@ -1,0 +1,30 @@
+const values = [["ONE HUNDRED", 100], ["TWENTY", 20], ["TEN", 10], ["FIVE", 5], ["ONE", 1], ["QUARTER", .25], ["DIME", .1], ["NICKEL", .05], ["PENNY", .01]]
+
+const checkCashRegister = (price, cash, cid) => {
+  let remainingChange = cash - price
+  let cidSum = 0
+  for (const s of cid)
+    cidSum += s[1]
+  if(remainingChange === cidSum)
+    return {status: "CLOSED", change: cid}
+  let change = []
+  let i = 0
+  while (remainingChange > 0)
+  {
+    if(i > 8)
+      return {status: "INSUFFICIENT_FUNDS", change: []}
+    if(remainingChange>=values[i][1]){
+      let amount = Math.floor(remainingChange/values[i][1])
+      let give
+      do {
+        give = values[i][1] * amount
+        amount--
+      }
+      while (cid[8-i][1] - give < 0)
+      change.push([values[i][0], give])
+      remainingChange = Math.round(100*(remainingChange-give))/100
+    }
+    i++
+  }
+  return {status: "OPEN", change: change}
+}

@@ -1,0 +1,18 @@
+const rot13Char = (char) => {
+  if (/^[^A-Z]$/.test(char))
+    return char
+
+  const code = char.charCodeAt(0);
+  let offset = 97
+  if (code >= 65 && code <= 90) 
+    offset = 65
+  
+  return String.fromCharCode(((code - offset + 13) % 26) + offset)
+}
+
+const rot13 = (str) => {
+  var decode = ''
+  for (const char of str)
+    decode += rot13Char(char)
+  return decode;
+}

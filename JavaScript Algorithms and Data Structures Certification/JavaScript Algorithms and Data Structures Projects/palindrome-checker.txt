@@ -1,0 +1,14 @@
+const recursivePalindrom = (str) => {
+  if (str.length <= 1)
+    return true
+
+  if (str[0] !== str[str.length-1])
+    return false
+
+  return recursivePalindrom(str.slice(1, str.length-1))
+}
+
+
+const palindrome = (str) => {
+  return recursivePalindrom(str.toLowerCase().replace(/[^a-z0-9]/g,''))
+}
