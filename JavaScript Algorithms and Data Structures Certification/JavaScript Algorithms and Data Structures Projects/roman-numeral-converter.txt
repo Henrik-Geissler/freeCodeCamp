@@ -1,4 +1,4 @@
-Const convertToRoman = (num) => {
+const convertToRoman = (num) => {
     if (isNaN(num))
         return NaN
 
